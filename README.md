@@ -2,38 +2,30 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10586695&assignment_repo_type=AssignmentRepo)
 # Assignment 3 - Language modelling and text generation using RNNs
 
-Text generation is hot news right now!
+## Purpose
+In this assignment, I will make use of TensorFlow so build a model for NLP. 
 
-For this assignemnt, you're going to create some scripts which will allow you to train a text generation model on some culturally significant data - comments on articles for *The New York Times*. You can find a link to the data [here](https://www.kaggle.com/datasets/aashita/nyt-comments).
+Comment on this: It is mostly a proof of concept (model don't perform that well).
 
-You should create a collection of scripts which do the following:
+Model can be found in ```out```folder. 
+Scripts can be found in ```src```folder. 
+Other stuff: setup.sh, run.sh, requirements.txt, utils (requirement_functions.py)
 
-- Train a model on the Comments section of the data
-  - [Save the trained model](https://www.tensorflow.org/api_docs/python/tf/keras/models/save_model)
-- Load a saved model
-  - Generate text from a user-suggested prompt
+## Scripts
 
-## Objectives
 
-Language modelling is hard and training text generation models is doubly hard. For this course, we lack somewhat the computationl resources, time, and data to train top-quality models for this task. So, if your RNNs don't perform overwhelmingly, that's fine (and expected). Think of it more as a proof of concept.
+## Data
+The data used to train the model is the ```New York Times comments```  data set. It consists of information about the comments, which have been made on New York Times articles in the period January-May 2017 and Januari-April 2018. 
 
-- Using TensorFlow to build complex deep learning models for NLP
-- Illustrating that you can structure repositories appropriately
-- Providing clear, easy-to-use documentation for your work.
+Before running the script, you must download the data set through Kaggle and place it in the ```in``` folder and call it "news_data". The data can be downloaded (503 MB) here: https://www.kaggle.com/datasets/aashita/nyt-comments?select=ArticlesApril2017.cs
 
-## Some tips
+Note that the data consists of two csv files, one for each article and one for the comments made on the given article. The data consists of over 2 million comments with 34 features.
 
-One big thing to be aware of - unlike the classroom notebook, this assignment is working on the *Comments*, not the articles. So two things to consider:
+NB: make sure not to push the data to GitHub, because the data files are too big. 
 
-1) The Comments data might be structured differently to the Articles data. You'll need to investigate that;
-2) There are considerably more Comments than articles - plan ahead for model training!
+## How to run the scripts
+- download the data set from Kaggle and put it in the in folder.
+- run "bash setup.sh" from the commandline to create a virtual environment and install the required packages
+- run "bash run.sh" from the commandline to activate the virtual environment, run the code, and deactivate the environment. 
 
-## Additional pointers
-
-- Make sure not to try to push the data to Github!
-- *Do* include the saved models that you output
-- Make sure to structure your repository appropriately
-  - Include a readme explaining relevant info
-    - E.g where does the data come from?
-    - How do I run the code?
-- Make sure to include a requirements file, etc...
+## References
