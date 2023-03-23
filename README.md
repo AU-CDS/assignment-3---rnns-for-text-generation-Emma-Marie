@@ -28,4 +28,6 @@ NB: make sure not to push the data to GitHub, because the data files are too big
 - run "bash setup.sh" from the commandline to create a virtual environment and install the required packages
 - run "bash run.sh" from the commandline to activate the virtual environment, run the code, and deactivate the environment. 
 
+INSTRUCTION TO GENERATE NEW TEXT! (HOW TO PARSE AN WORD AND AN LENGTH ARGUMENT)
+
 ## References

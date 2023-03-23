@@ -22,7 +22,8 @@ import utils.requirement_functions as rf
 
 def get_data():
     #load data
-    data_dir = os.path.join("in/news_data") 
+    #data_dir = os.path.join("in/news_data") 
+    data_dir = os.path.join("in/test_data") 
     # get only headlines
     all_comments = []
     for filename in os.listdir(data_dir):
@@ -42,10 +43,10 @@ def get_data():
 
     # turn input (every newspaper headline) into numerical output
     inp_sequences = rf.get_sequence_of_tokens(tokenizer, corpus)
-    # pad input (make sequences the sme length)
+    # pad input (make sequences the same length)
     predictors, label, max_sequence_len = rf.generate_padded_sequences(inp_sequences)
 
-    return total_words, max_sequence_len
+    return max_sequence_len, total_words
 
 
 def rnn_model(max_sequence_len, total_words):
@@ -55,20 +56,20 @@ def rnn_model(max_sequence_len, total_words):
     return model
 
     #Train model
-    #history = model.fit(predictors, 
-    #                    label, 
-    #                    epochs=100, # more epochs = more accurate (the number is this low to make it run faster)
-    #                    batch_size=128, # large batch size to speed up the learning
-    #                    verbose=1)
+    history = model.fit(predictors, 
+                        label, 
+                        epochs=100,
+                        batch_size=128,
+                        verbose=1)
 
- #   return history
+    return history
 
 def main():
    # load and prepare data
    total_words, max_sequence_len = get_data()
    print("Data is prepared")
    # train model
-   model = rnn_model(max_sequence_len, total_words)
+   history = rnn_model(total_words, max_sequence_len)
    print("Model is trained!")
    # Save model
    #tf.keras.models.save_model(
@@ -81,6 +82,7 @@ def main():
    # options=None,
    # save_traces=True
    # )
+   #Print("Model saved!")
 
 if __name__ == "__main__":
     main()
