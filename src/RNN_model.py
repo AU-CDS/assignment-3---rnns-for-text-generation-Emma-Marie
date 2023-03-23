@@ -44,17 +44,15 @@ def get_data():
     # turn input (every newspaper headline) into numerical output
     inp_sequences = rf.get_sequence_of_tokens(tokenizer, corpus)
     # pad input (make sequences the same length)
-    predictors, label, max_sequence_len = rf.generate_padded_sequences(inp_sequences)
+    predictors, label, max_sequence_len = rf.generate_padded_sequences(inp_sequences, total_words)
 
-    return max_sequence_len, total_words
+    return total_words, max_sequence_len, predictors, label
 
 
-def rnn_model(max_sequence_len, total_words):
+def rnn_model(total_words, max_sequence_len, predictors, label):
    #create model
-    model = rf.create_model(max_sequence_len, total_words)
+    model = rf.create_model(total_words, max_sequence_len)
     print(model.summary())
-    return model
-
     #Train model
     history = model.fit(predictors, 
                         label, 
@@ -66,22 +64,12 @@ def rnn_model(max_sequence_len, total_words):
 
 def main():
    # load and prepare data
-   total_words, max_sequence_len = get_data()
+   total_words, max_sequence_len, predictors, label = get_data()
    print("Data is prepared")
    # train model
-   history = rnn_model(total_words, max_sequence_len)
+   history = rnn_model(total_words, max_sequence_len, predictors, label)
    print("Model is trained!")
-   # Save model
-   #tf.keras.models.save_model(
-   # history,
-   # "out/rnn_model",
-   # overwrite=True,
-   # include_optimizer=True,
-   # save_format=None,
-   # signatures=None,
-   # options=None,
-   # save_traces=True
-   # )
+   # Save model...
    #Print("Model saved!")
 
 if __name__ == "__main__":
