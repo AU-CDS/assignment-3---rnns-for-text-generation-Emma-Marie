@@ -69,8 +69,17 @@ def main():
    # train model
    history = rnn_model(total_words, max_sequence_len, predictors, label)
    print("Model is trained!")
+   
    # Save model...
-   #Print("Model saved!")
+   #tf.keras.saving.save_model(
+    # model, filepath, overwrite=True, save_format=None, **kwargs
+    #)
+    #Print("Model saved!")
+   
+    ###or###
+    #from joblib import dump, load
+    # dump(classifier, "NN_classifier.joblib")
+    #dump(vectorizer, "tfidf_vectorizer.joblib")
 
 if __name__ == "__main__":
     main()

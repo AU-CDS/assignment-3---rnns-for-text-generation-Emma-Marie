@@ -1,9 +1,15 @@
 import argparse
 
 #load RNN_model
+# from keras.models import load_model
+# model = load_model('model.h5')
+
+###OR###
+# from joblib import dump, load
+# loaded_clf = load("NN_classifier.joblib")
+# loaded_vect = load("tfidf_vectorizer.joblib")
 
 # generates new comments
-
 def input_parse():
     #initialie the parser
     parser = argparse.ArgumentParser()
