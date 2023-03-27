@@ -11,6 +11,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout
+
 # surpress warnings
 import warnings
 warnings.filterwarnings("ignore")
@@ -30,11 +31,17 @@ def get_data():
         if 'Comments' in filename:
             article_df = pd.read_csv(data_dir + "/" + filename)
             all_comments.extend(list(article_df["commentBody"].values))
+
+    
+    #sampling 10000 random comments
+    import random
+    sample_comments = random.sample(all_comments, 100)
     
     # clean a bit
-    all_comments = [h for h in all_comments if h != "Unknown"]
+    # OBS remember to change sample_comments into all_comments
+    sample_comments = [h for h in sample_comments if h != "Unknown"]
     #Create corpus
-    corpus = [rf.clean_text(x) for x in all_comments]
+    corpus = [rf.clean_text(x) for x in sample_comments]
     
     # tokenization created by TensorFlow
     tokenizer = Tokenizer()
@@ -46,40 +53,35 @@ def get_data():
     # pad input (make sequences the same length)
     predictors, label, max_sequence_len = rf.generate_padded_sequences(inp_sequences, total_words)
 
-    return total_words, max_sequence_len, predictors, label
+    return max_sequence_len, total_words, predictors, label
 
 
-def rnn_model(total_words, max_sequence_len, predictors, label):
+def rnn_model(max_sequence_len, total_words, predictors, label):
    #create model
-    model = rf.create_model(total_words, max_sequence_len)
+    model = rf.create_model(max_sequence_len, total_words)
     print(model.summary())
     #Train model
     history = model.fit(predictors, 
                         label, 
-                        epochs=100,
+                        epochs=10, #turn epoc upS
                         batch_size=128,
                         verbose=1)
 
-    return history
+    return model
 
 def main():
    # load and prepare data
-   total_words, max_sequence_len, predictors, label = get_data()
+   max_sequence_len, total_words, predictors, label = get_data()
    print("Data is prepared")
    # train model
-   history = rnn_model(total_words, max_sequence_len, predictors, label)
+   model = rnn_model(max_sequence_len, total_words, predictors, label)
    print("Model is trained!")
-   
-   # Save model...
+   # Save model
+   model.save("out", overwrite=True, save_format=None)
    #tf.keras.saving.save_model(
-    # model, filepath, overwrite=True, save_format=None, **kwargs
-    #)
-    #Print("Model saved!")
-   
-    ###or###
-    #from joblib import dump, load
-    # dump(classifier, "NN_classifier.joblib")
-    #dump(vectorizer, "tfidf_vectorizer.joblib")
+   #model, outpath, overwrite=True, save_format=None, **kwargs
+   # )
+   print("Model saved!")
 
 if __name__ == "__main__":
     main()
