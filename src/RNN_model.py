@@ -35,7 +35,7 @@ def get_data():
     
     #sampling 10000 random comments
     import random
-    sample_comments = random.sample(all_comments, 100)
+    sample_comments = random.sample(all_comments, 10000)
     
     # clean a bit
     # OBS remember to change sample_comments into all_comments
@@ -63,7 +63,7 @@ def rnn_model(max_sequence_len, total_words, predictors, label):
     #Train model
     history = model.fit(predictors, 
                         label, 
-                        epochs=10, #turn epoc upS
+                        epochs=10, #turn epoc up
                         batch_size=128,
                         verbose=1)
 
@@ -77,10 +77,9 @@ def main():
    model = rnn_model(max_sequence_len, total_words, predictors, label)
    print("Model is trained!")
    # Save model
-   model.save("out", overwrite=True, save_format=None)
-   #tf.keras.saving.save_model(
-   #model, outpath, overwrite=True, save_format=None, **kwargs
-   # )
+   outpath = os.path.join("out/rnn_model")
+   model.save(outpath, overwrite=True, save_format=None)
+   #tf.keras.saving.save_model(model, outpath, overwrite=True, save_format=None)
    print("Model saved!")
 
 if __name__ == "__main__":

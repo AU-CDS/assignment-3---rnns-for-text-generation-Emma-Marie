@@ -1,22 +1,22 @@
 import argparse
-
-import tensorflow
+import tensorflow as tf
 import tensorflow.keras.utils as ku 
 from keras.models import load_model
 from tensorflow import keras
-
 import sys
 sys.path.append(".")
 import utils.requirement_functions as rf
-
+import RNN_model
 
 def main():
     #load RNN_model
-    model = keras.models.load_model('out')
-    #model = load_model('model.h5')
-    #from RNN_model.py import max_sequence_len
+    model = keras.models.load_model('out/rnn_model')
+    #model = load_model('out/rnn_model')
+    #tf.keras.saving.load_model(filepath, custom_objects=None, compile=True, safe_mode=True)
+    max_sequence_len = RNN_model
+    tokenizer = RNN_model
     print (rf.generate_text("danish", 5, model, max_sequence_len))
-# generates new comments
+
 #def input_parse():
 #    #initialie the parser
 #    parser = argparse.ArgumentParser()
@@ -29,7 +29,7 @@ def main():
 #    return args
 
 #def text(word, length):
-#    print (generate_text(word,length , model, max_sequence_len))
+#    print (generate_text(word, length, model, max_sequence_len))
 
 #def main():
 #    #run input parse to get name and age
