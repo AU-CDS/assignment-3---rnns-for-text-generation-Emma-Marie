@@ -18,11 +18,13 @@ import warnings
 warnings.filterwarnings("ignore")
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
+#Cleaning text
+# makes everything lower case and keep everything that arent punctuation. 
+# Also ensuring that everything is utf8 to make sure everything is clean.
 def clean_text(txt):
     txt = "".join(v for v in txt if v not in string.punctuation).lower()
     txt = txt.encode("utf8").decode("ascii",'ignore')
-    return txt 
-# makes everything lower case and keep everything that arent punctuation. Also ensuring that everything is utf8 to make sure everything is clean. 
+    return txt  
 
 def get_sequence_of_tokens(tokenizer, corpus):
     ## convert data to sequence of tokens 
@@ -55,12 +57,12 @@ def create_model(max_sequence_len, total_words):
     model.add(Embedding(total_words, 
                         10, 
                         input_length=input_len))
-    # this part learns how it can represent the tokens using word embeddings (vectors of weights), so we get the most information about how the tokens are reated to one another. 
+    # this part learns how it can represent the tokens using word embeddings.
+    # In this way we get the most information about how the tokens are related to one another. 
     
     # Add Hidden Layer 1 - LSTM Layer
     model.add(LSTM(100))
-    model.add(Dropout(0.1)) 
-    # drop out --> remove 10% of the weights and only train on 90% -> makes it more difficult to learn -> the model actually gets better (less overfitting!)
+    model.add(Dropout(0.1)) #remove 10% of the weights and only train on 90% = less overfitting
     
     # Add Output Layer
     model.add(Dense(total_words, 
@@ -71,11 +73,11 @@ def create_model(max_sequence_len, total_words):
     
     return model
 
-def generate_text(seed_text, next_words, model, max_sequence_len):
+def generate_text(tokenizer, seed_text, next_words, model, max_sequence_len):
     for _ in range(next_words):
         token_list = tokenizer.texts_to_sequences([seed_text])[0]
         token_list = pad_sequences([token_list], 
-                                    maxlen=max_sequence_len-1, 
+                                    maxlen=int(max_sequence_len)-1, 
                                     padding='pre')
         predicted = np.argmax(model.predict(token_list),
                                             axis=1) # predict the word that is likely to come next after this token

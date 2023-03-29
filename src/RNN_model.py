@@ -31,14 +31,12 @@ def get_data():
         if 'Comments' in filename:
             article_df = pd.read_csv(data_dir + "/" + filename)
             all_comments.extend(list(article_df["commentBody"].values))
-
     
     #sampling 10000 random comments
     import random
-    sample_comments = random.sample(all_comments, 10000)
+    sample_comments = random.sample(all_comments, 100)
     
-    # clean a bit
-    # OBS remember to change sample_comments into all_comments
+    # clean a bit --> OBS remember to change sample_comments into all_comments
     sample_comments = [h for h in sample_comments if h != "Unknown"]
     #Create corpus
     corpus = [rf.clean_text(x) for x in sample_comments]
@@ -53,7 +51,7 @@ def get_data():
     # pad input (make sequences the same length)
     predictors, label, max_sequence_len = rf.generate_padded_sequences(inp_sequences, total_words)
 
-    return max_sequence_len, total_words, predictors, label
+    return max_sequence_len, total_words, predictors, label, tokenizer
 
 
 def rnn_model(max_sequence_len, total_words, predictors, label):
@@ -63,7 +61,7 @@ def rnn_model(max_sequence_len, total_words, predictors, label):
     #Train model
     history = model.fit(predictors, 
                         label, 
-                        epochs=10, #turn epoc up
+                        epochs=100, 
                         batch_size=128,
                         verbose=1)
 
@@ -71,16 +69,19 @@ def rnn_model(max_sequence_len, total_words, predictors, label):
 
 def main():
    # load and prepare data
-   max_sequence_len, total_words, predictors, label = get_data()
+   max_sequence_len, total_words, predictors, label, tokenizer = get_data()
    print("Data is prepared")
    # train model
    model = rnn_model(max_sequence_len, total_words, predictors, label)
    print("Model is trained!")
+   
    # Save model
-   outpath = os.path.join("out/rnn_model")
-   model.save(outpath, overwrite=True, save_format=None)
-   #tf.keras.saving.save_model(model, outpath, overwrite=True, save_format=None)
+   outpath = os.path.join(f"model/rnn-model_seq{max_sequence_len}.keras")
+   tf.keras.models.save_model(model, outpath, overwrite=False, save_format=None)
    print("Model saved!")
-
+   # saving tokenizer
+   from joblib import dump, load
+   dump(tokenizer, "model/tokenizer.joblib")
+   
 if __name__ == "__main__":
     main()
