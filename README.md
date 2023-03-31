@@ -26,7 +26,8 @@ __NB:__ make sure not to push the data to GitHub, because of the size of the dat
     - run "bash setup.sh" from the commandline to create a virtual environment and install the required packages.
     - run "bash run.sh" from the commandline to activate the virtual environment, run the code, and deactivate the environment. 
 - Then run the text_generator.py:
-    - The text_generator.py is run through the commandline by typing "python3 src/text_generator.py --filename ```write filename```-- start_word ```write word```--length ```write an int number```". The filename is the name of the model trained in the RNN_model.py script. The start_word a self chosen word which should be the first word of the generated text. The length is a number indicating how many words you wish to follow your chosen word in the generated text. 
+    - Firstly, activate the virtual environment manually by running "source ./tensorflow_env/bin/activate" from the command line. 
+    - Secondly, run the text_generator.py from the commandline by typing "python3 src/text_generator.py --filename ```write filename```-- start_word ```write word```--length ```write an int number```". The filename is the name of the model trained in the RNN_model.py script. The start_word a self chosen word which should be the first word of the generated text. The length is a number indicating how many words you wish to follow your chosen word in the generated text. 
 
 ## Notes on the model
 The data set is very large, and I had to train my model on a smaller sample to be able to train it without ucloud killing the run. I created a repo called test_data consisting of two of the csv's and did a random sample picking 100 comments.  
