@@ -8,7 +8,6 @@ In this assignment, I will make use of TensorFlow so build a recurrent neural ne
 ## Scripts
 This project consists of two scripts, which can both be found in the ```src```folder: 
     1) The first script ```RNN_model.py``` loads and prepares the data, and train and save the model. The preparetion consists of creating a corpus of only the csv files with comments (and not articles), tokenizing the texts, turn the texts into numerical output, and pad the outputs to give them the same length.  The trained model is saved in the ```out``` folder as well as the tokenizer. The model is mostly a proof of concept (see 'Notes on the model'). The name of the model includes the numeric value of the max_sequence_len variable, which is needed in the script text_generator.py. This value is isolated in text_generator.py using regex, and then assigned to a max_sequence_len in this script. 
-
     2) The second script ```text_generator.py``` loads in the model and uses it to generate new comments. The generated comment is based on two arguments parsed through the commandline. The arguments are the begining word and the length of the generated text (number of words after beginning word). 
 
 ## Data
