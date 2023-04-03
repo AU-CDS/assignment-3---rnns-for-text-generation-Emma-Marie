@@ -23,8 +23,7 @@ import utils.requirement_functions as rf
 
 def get_data():
     #load data
-    #data_dir = os.path.join("in/news_data") 
-    data_dir = os.path.join("in/test_data") 
+    data_dir = os.path.join("in/news_data") 
     # get only headlines
     all_comments = []
     for filename in os.listdir(data_dir):
@@ -32,14 +31,10 @@ def get_data():
             article_df = pd.read_csv(data_dir + "/" + filename)
             all_comments.extend(list(article_df["commentBody"].values))
     
-    #sampling 10000 random comments
-    import random
-    sample_comments = random.sample(all_comments, 100)
-    
-    # clean a bit --> OBS remember to change sample_comments into all_comments
-    sample_comments = [h for h in sample_comments if h != "Unknown"]
+    # clean a bit
+    all_comments = [h for h in all_comments if h != "Unknown"]
     #Create corpus
-    corpus = [rf.clean_text(x) for x in sample_comments]
+    corpus = [rf.clean_text(x) for x in all_comments]
     
     # tokenization created by TensorFlow
     tokenizer = Tokenizer()
