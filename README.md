@@ -38,4 +38,4 @@ I also only set the epochs in the model to 100, to make the model train faster. 
 In the ```utils``` folder there is a script called ```requirement_functions.py```, which are imported into my two main scripts. The functions in this requirement_functions.py script is developed in class.
 
 ## References
-"New York Times Comments", New York Times, from Kaggle
+"New York Times Comments", New York Times, Kaggle: https://www.kaggle.com/datasets/aashita/nyt-comments 
