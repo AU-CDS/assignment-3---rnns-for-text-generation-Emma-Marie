@@ -13,7 +13,7 @@ This project consists of two scripts, which can both be found in the ```src```fo
 2) The second script ```text_generator.py``` loads in the model and uses it to generate new comments. The generated comment is based on two arguments parsed through the commandline. The arguments are the begining word and the length of the generated text (number of words after beginning word). 
 
 ## Data
-The data used to train the model is the ```New York Times comments```  data set. It consists of information about the comments, which have been made on New York Times articles in the period January-May 2017 and Januari-April 2018. 
+The data is used to train the model is the ```New York Times comments```  data set. It consists of information about the comments, which have been made on New York Times articles in the period January-May 2017 and Januari-April 2018. 
 
 Before running the script, you must download the data set through Kaggle and place it in the ```in``` folder and call it "news_data". The data can be downloaded (503 MB) here: https://www.kaggle.com/datasets/aashita/nyt-comments?select=ArticlesApril2017.cs
 
