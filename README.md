@@ -35,7 +35,7 @@ The data set is very large, and I had to train my model on a smaller sample to b
 I also only set the epochs in the model to 100, to make the model train faster. The epochs could be given a bigger value for the model to make more accurate predictions. My model is therefore rather a __proof of concept__ than an actually well performing model.
 
 ## Utils
-In the ```utils``` folder there is a script called ```requirement_functions.py```, which are imported into my two main scripts. The functions in this requirement_functions.py script is developed in class.
+In the ```utils``` folder there is a script called ```requirement_functions.py```, which are imported into my two main scripts. The functions in this requirement_functions.py script was developed by my teacher Ross, and we used them in class.
 
 ## References
 "New York Times Comments", New York Times, Kaggle: https://www.kaggle.com/datasets/aashita/nyt-comments 
