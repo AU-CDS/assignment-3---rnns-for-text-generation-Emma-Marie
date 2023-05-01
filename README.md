@@ -7,12 +7,13 @@ In this assignment, I will make use of TensorFlow so build a recurrent neural ne
 
 ## Scripts
 This project consists of two scripts, which can both be found in the ```src```folder: 
-    1) The first script ```RNN_model.py``` loads and prepares the data, and train and save the model. The preparetion consists of creating a corpus of only the csv files with comments (and not articles), tokenizing the texts, turn the texts into numerical output, and pad the outputs to give them the same length.  The trained model is saved in the ```out``` folder as well as the tokenizer. The model is mostly a proof of concept (see 'Notes on the model'). The name of the model includes the numeric value of the max_sequence_len variable, which is needed in the script text_generator.py. This value is isolated in text_generator.py using regex, and then assigned to a max_sequence_len in this script. 
 
-    2) The second script ```text_generator.py``` loads in the model and uses it to generate new comments. The generated comment is based on two arguments parsed through the commandline. The arguments are the begining word and the length of the generated text (number of words after beginning word). 
+1) The first script ```RNN_model.py``` loads and prepares the data, and train and save the model. The preparetion consists of creating a corpus of only the csv files with comments (and not articles), tokenizing the texts, turn the texts into numerical output, and pad the outputs to give them the same length.  The trained model is saved in the ```out``` folder as well as the tokenizer. The model is mostly a proof of concept (see 'Notes on the model'). The name of the model includes the numeric value of the max_sequence_len variable, which is needed in the script text_generator.py. This value is isolated in text_generator.py using regex, and then assigned to a max_sequence_len in this script. 
+ 
+2) The second script ```text_generator.py``` loads in the model and uses it to generate new comments. The generated comment is based on two arguments parsed through the commandline. The arguments are the begining word and the length of the generated text (number of words after beginning word). 
 
 ## Data
-The data used to train the model is the ```New York Times comments```  data set. It consists of information about the comments, which have been made on New York Times articles in the period January-May 2017 and Januari-April 2018. 
+The data which is used to train the model is the ```New York Times comments```  data set. It consists of information about the comments, which have been made on New York Times articles in the period January-May 2017 and Januari-April 2018. 
 
 Before running the script, you must download the data set through Kaggle and place it in the ```in``` folder and call it "news_data". The data can be downloaded (503 MB) here: https://www.kaggle.com/datasets/aashita/nyt-comments?select=ArticlesApril2017.cs
 
@@ -29,12 +30,12 @@ __NB:__ make sure not to push the data to GitHub, because of the size of the dat
     - Firstly, activate the virtual environment manually by running "source ./tensorflow_env/bin/activate" from the command line. 
     - Secondly, run the text_generator.py from the commandline by typing "python3 src/text_generator.py --filename ```write filename```-- start_word ```write word```--length ```write an int number```". The filename is the name of the model trained in the RNN_model.py script. The start_word a self chosen word which should be the first word of the generated text. The length is a number indicating how many words you wish to follow your chosen word in the generated text. 
 
-## Notes on the model
+## Descussion of results
 The data set is very large, and I had to train my model on a smaller sample to be able to train it without ucloud killing the run. I created a repo called test_data consisting of two of the csv's and did a random sample picking 100 comments.  
 I also only set the epochs in the model to 100, to make the model train faster. The epochs could be given a bigger value for the model to make more accurate predictions. My model is therefore rather a __proof of concept__ than an actually well performing model.
 
 ## Utils
-In the ```utils``` folder there is a script called ```requirement_functions.py```, which are imported into my two main scripts. The functions in this requirement_functions.py script is developed in class.
+In the ```utils``` folder there is a script called ```requirement_functions.py```, which are imported into my two main scripts. The functions in this requirement_functions.py script was developed by my teacher Ross, and we used them in class.
 
 ## References
-"New York Times Comments", New York Times, from Kaggle
+"New York Times Comments", New York Times, Kaggle: https://www.kaggle.com/datasets/aashita/nyt-comments 
