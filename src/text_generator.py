@@ -3,15 +3,16 @@ import sys
 sys.path.append(".")
 import utils.requirement_functions as rf
 import tensorflow as tf
-import tensorflow.keras.utils as ku 
 from keras.models import load_model
 from tensorflow import keras
+# loading tokenizer
+from joblib import load
 
 def input_parse():
     #initialie the parser
     parser = argparse.ArgumentParser()
     # add argument
-    parser.add_argument("--filename", type=str) # filename
+    parser.add_argument("--filename", type=str) # name of the model
     parser.add_argument("--start_word", type=str, default="danish") #the first word of the generated text
     parser.add_argument("--length", type=int, default=5) # the number of words following the chosen word
     # parse the arguments from command line
@@ -24,7 +25,6 @@ def load_model(args):
     # importing trained RNN model
     model = tf.keras.models.load_model(f"model/{filename}")
     # load tokenizer
-    from joblib import dump, load
     tokenizer = load("model/tokenizer.joblib")
     # get max_sequence_len from filename
     max_sequence_len = filename.split("_")[1].split("q")[1].split(".")[0]
