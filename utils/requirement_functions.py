@@ -26,10 +26,21 @@ def clean_text(txt):
     txt = txt.encode("utf8").decode("ascii",'ignore')
     return txt  
 
+#def get_sequence_of_tokens(tokenizer, corpus):
+#    ## convert data to sequence of tokens 
+#    input_sequences = []
+#    for line in corpus: #for every headline in the data
+#        token_list = tokenizer.texts_to_sequences([line])[0]
+#        for i in range(1, len(token_list)):
+#            n_gram_sequence = token_list[:i+1]
+#            input_sequences.append(n_gram_sequence)
+#    return input_sequences
+
 def get_sequence_of_tokens(tokenizer, corpus):
-    ## convert data to sequence of tokens 
+    # convert data to sequence of tokens
     input_sequences = []
-    for line in corpus: #for every headline in the data
+    #for every headline in the data
+    for line in corpus:
         token_list = tokenizer.texts_to_sequences([line])[0]
         for i in range(1, len(token_list)):
             n_gram_sequence = token_list[:i+1]
