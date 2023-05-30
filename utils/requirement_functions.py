@@ -24,7 +24,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 def clean_text(txt):
     txt = "".join(v for v in txt if v not in string.punctuation).lower()
     txt = txt.encode("utf8").decode("ascii",'ignore')
-    return txt  
+    return txt   
 
 #def get_sequence_of_tokens(tokenizer, corpus):
 #    ## convert data to sequence of tokens 
@@ -49,7 +49,9 @@ def get_sequence_of_tokens(tokenizer, corpus):
 
 def generate_padded_sequences(input_sequences, total_words):
     # get the length of the longest sequence
-    max_sequence_len = max([len(x) for x in input_sequences])
+    max_sequence_len = max([len(x) for x in input_sequences],default=1)
+    #max_sequence_len = max([len(x) for x in input_sequences])
+    
     # make every sequence the length of the longest on
     input_sequences = np.array(pad_sequences(input_sequences, 
                                             maxlen=max_sequence_len, 
