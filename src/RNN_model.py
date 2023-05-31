@@ -35,7 +35,7 @@ def get_data(path):
             comments_df = pd.read_csv(path + "/" + filename)
             # add the column with the content of the comments to the all_comments list
             all_comments.extend(list(comments_df["commentBody"].values))
-    
+
     # clean comments a bit
     all_comments = [h for h in all_comments if h != "Unknown"]
     #create corpus
@@ -62,7 +62,7 @@ def rnn_model(max_sequence_len, total_words, predictors, label, outpath):
     #Train model
     history = model.fit(predictors, 
                         label, 
-                        epochs=100, # number of epochs
+                        epochs=1, # number of epochs
                         batch_size=128, # the size of batches of data
                         verbose=1)
     # save the model
@@ -75,7 +75,7 @@ def main():
    # load and prepare data
    max_sequence_len, total_words, predictors, label, tokenizer = get_data(data_dir)
    # train model
-   model_path = os.path.join(f"model", "rnn-model_seq{max_sequence_len}.keras")
+   model_path = os.path.join(f"model", f"rnn-model_seq{max_sequence_len}.keras")
    model = rnn_model(max_sequence_len, total_words, predictors, label, model_path)
    # saving tokenizer
    from joblib import dump, load
