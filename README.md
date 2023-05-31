@@ -2,40 +2,49 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10586695&assignment_repo_type=AssignmentRepo)
 # Assignment 3 - Language modelling and text generation using RNNs
 
-## Purpose
-In this assignment, I will make use of TensorFlow so build a recurrent neural network model for NLP. The model is trained on the ```New York Times comments```  data set. The model can be used to generate new newspaper comments based on predictions of which word are most likely to follow the former word.
+## 1. Contribution 
+I have developed the code for the two main scripts for this assignment without other contributors. In the two main scripts I use some functions from the script ```required_functions.py``` in the ```utils``` folder. These functions were provided by my teacher Ross and used during class.
 
-## Scripts
-This project consists of two scripts, which can both be found in the ```src```folder: 
+## 2. Description
+In this assignment, I will use ```TensorFlow``` to build a recurrent neural network model for NLP. The model is trained on the ```New York Times comments``` dataset. The model can be used to generate new newspaper comments based on predictions of which word are most likely to follow the former. 
 
-1) The first script ```RNN_model.py``` loads and prepares the data, and train and save the model. The preparetion consists of creating a corpus of only the csv files with comments (and not articles), tokenizing the texts, turn the texts into numerical output, and pad the outputs to give them the same length.  The trained model is saved in the ```out``` folder as well as the tokenizer. The model is mostly a proof of concept (see 'Notes on the model'). The name of the model includes the numeric value of the max_sequence_len variable, which is needed in the script text_generator.py. This value is isolated in text_generator.py using regex, and then assigned to a max_sequence_len in this script. 
- 
-2) The second script ```text_generator.py``` loads in the model and uses it to generate new comments. The generated comment is based on two arguments parsed through the commandline. The arguments are the begining word and the length of the generated text (number of words after beginning word). 
+## 3. Methods
+This assignment consists of two scripts, which can be found in the ```src``` folder. The first script is ```RNN_model.py```. It loads and prepares the data and trains and saves a RNN model. The preparation consists of creating a corpus of the csv files with comments, tokenizing the comments, turning them into numerical output, and pad the outputs to give them the same length.  Then the RNN model is set up and trained on the dataset, and the trained model is saved in the models folder as well as the tokenizer. The name of the saved model includes the numeric values of the max_sequence_len variable, which is needed in the script text_generator.py. 
 
-## Data
-The data which is used to train the model is the ```New York Times comments```  data set. It consists of information about the comments, which have been made on New York Times articles in the period January-May 2017 and Januari-April 2018. 
+The second script is called ```text_generator.py```. The script loads the trained model and uses it to generate new newspaper comments. The value of the variable max_sequence_len is extracted from the name of the model using regex. The generated comment is based on the three arguments parsed through the command line. The arguments are the beginning word and the length of the generated comment.  
 
-Before running the script, you must download the data set through Kaggle and place it in the ```in``` folder and call it "news_data". The data can be downloaded (503 MB) here: https://www.kaggle.com/datasets/aashita/nyt-comments?select=ArticlesApril2017.cs
+## 4. Data
+The data used for training the model is the ```New York Times comments``` dataset. It consists of information about the comments, which have been made on New York Times articles in the period January-May 2017 and January-April 2018. The data consists of over 2 million comments with 34 features. Note that the dataset consists of 18 csv files, 9 with articles and 9 with comments. For this assignment only the csvs with comments are used. 
 
-Note that the data consists of two csv files, one for each article and one for the comments made on the given article. The data consists of over 2 million comments with 34 features.
+### 4.1 Get the data
+Before running the script, please download the dataset (503 MB) through Kaggle: https://www.kaggle.com/datasets/aashita/nyt-comments?select=ArticlesApril2017.cs. Name the dataset “news_data” and place it in the ```in``` folder. 
 
-__NB:__ make sure not to push the data to GitHub, because of the size of the data files.
+## 5. Usage
 
-## How to run the scripts
-- Download the data set from Kaggle and put it in the ```in``` folder. Call the data "news_data" or remember to change the file path, if you give it another name. 
-- Begin by running the RNN_model.py:
-    - run "bash setup.sh" from the commandline to create a virtual environment and install the required packages.
-    - run "bash run.sh" from the commandline to activate the virtual environment, run the code, and deactivate the environment. 
-- Then run the text_generator.py:
-    - Firstly, activate the virtual environment manually by running "source ./tensorflow_env/bin/activate" from the command line. 
-    - Secondly, run the text_generator.py from the commandline by typing "python3 src/text_generator.py --filename ```write filename```-- start_word ```write word```--length ```write an int number```". The filename is the name of the model trained in the RNN_model.py script. The start_word a self chosen word which should be the first word of the generated text. The length is a number indicating how many words you wish to follow your chosen word in the generated text. 
+### 5.1 Prerequisites
+For the scripts to run properly, please install Python 3 and Bash. The code for this assignment is created and tested using the app “Coder Python 1.73.1” on Ucloud.sdu.dk. The final step it to clone the GitHub repository on your own device.
 
-## Descussion of results
-The data set is very large, and I had to train my model on a smaller sample to be able to train it without ucloud killing the run. I created a repo called test_data consisting of two of the csv's and did a random sample picking 100 comments.  
-I also only set the epochs in the model to 100, to make the model train faster. The epochs could be given a bigger value for the model to make more accurate predictions. My model is therefore rather a __proof of concept__ than an actually well performing model.
+### 5.2 Install packages
+To install the required packages, run the command “bash setup.sh” from the command line. The command creates a virtual environment and installs the packages from requirements.txt in it:
 
-## Utils
-In the ```utils``` folder there is a script called ```requirement_functions.py```, which are imported into my two main scripts. The functions in this requirement_functions.py script was developed by my teacher Ross, and we used them in class.
+        bash setup.sh
 
-## References
+
+### 5.3 Run the scripts
+The script ```RNN_model.py``` is run with the comment “bash run.sh” from the command line. The command activates the virtual environment, run the script, and deactivates the environment: 
+		
+		bash run.sh
+
+To run the script ```text_generator.py```, two steps must be followed. First, you have to manually activate the virtual environment by running the command “source ./tensorflow_env/bin/activate” from the command line:
+
+        source ./tensorflow_env/bin/activate
+
+Then, run the command “python3 src/text_generator.py --filename --start_word --length”. The filename argument is the name of the model trained in the RNN_model.py. This argument is necessary, because the max_sequence_len is extracted from the model’s name in the generator script. The start_word argument is the word which you wish to be the first word of the generated piece of text. The length argument is the number of words you wish to follow your chosen word in the generated piece of text. If no number is specified,  the default length is 10 words, and 10 us also used in the example below:
+
+        python3 src/text_generator.py --filename rnn-model_seq280.keras --start_word female --length 10
+
+## 6. Descussion of results
+The datatset is very large, and I had to train my model on a smaller sample to be able to train it without Ucloud killing the run. The model is only trained on 100 sampled comments, and it is therefore rather a proof of concept than an actual well performing model. This means, that the generated text isn’t as convincing as it would be, if the model were trained on a larger data sample. 
+
+## 7. References
 "New York Times Comments", New York Times, Kaggle: https://www.kaggle.com/datasets/aashita/nyt-comments 
