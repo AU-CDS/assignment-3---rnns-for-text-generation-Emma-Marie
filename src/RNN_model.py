@@ -32,19 +32,12 @@ def get_data(path):
             all_comments.extend(list(comments_df["commentBody"].values))
 
     #sampling
-    #all_comments = all_comments[0:100]
+    all_comments = all_comments[0:100]
     
     # clean a bit
     all_comments = [h for h in all_comments if h != "Unknown"]
-
-    #Create corpus
-    for x in all_comments:
-        if not isinstance(x,str):
-            x = str(x)
-        if x:
-            corpus = rf.clean_text(x)
     
-    #corpus = [rf.clean_text(x) for x in all_comments]
+    corpus = [rf.clean_text(x) for x in all_comments]
     
     # tokenization created by TensorFlow
     tokenizer = Tokenizer()
@@ -67,7 +60,7 @@ def rnn_model(max_sequence_len, total_words, predictors, label, outpath):
     #Train model
     history = model.fit(predictors, 
                         label, 
-                        epochs=3, # set to e.g. 100
+                        epochs=100,
                         batch_size=128,
                         verbose=1)
     tf.keras.models.save_model(model, outpath, overwrite=False, save_format=None)

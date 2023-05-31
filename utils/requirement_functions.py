@@ -26,16 +26,6 @@ def clean_text(txt):
     txt = txt.encode("utf8").decode("ascii",'ignore')
     return txt   
 
-#def get_sequence_of_tokens(tokenizer, corpus):
-#    ## convert data to sequence of tokens 
-#    input_sequences = []
-#    for line in corpus: #for every headline in the data
-#        token_list = tokenizer.texts_to_sequences([line])[0]
-#        for i in range(1, len(token_list)):
-#            n_gram_sequence = token_list[:i+1]
-#            input_sequences.append(n_gram_sequence)
-#    return input_sequences
-
 def get_sequence_of_tokens(tokenizer, corpus):
     # convert data to sequence of tokens
     input_sequences = []
@@ -49,8 +39,7 @@ def get_sequence_of_tokens(tokenizer, corpus):
 
 def generate_padded_sequences(input_sequences, total_words):
     # get the length of the longest sequence
-    max_sequence_len = max([len(x) for x in input_sequences],default=1)
-    #max_sequence_len = max([len(x) for x in input_sequences])
+    max_sequence_len = max([len(x) for x in input_sequences])
     
     # make every sequence the length of the longest on
     input_sequences = np.array(pad_sequences(input_sequences, 
