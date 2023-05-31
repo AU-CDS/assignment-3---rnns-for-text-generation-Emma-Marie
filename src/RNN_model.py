@@ -30,9 +30,6 @@ def get_data(path):
         if 'Comments' in filename:
             comments_df = pd.read_csv(path + "/" + filename)
             all_comments.extend(list(comments_df["commentBody"].values))
-
-    #sampling
-    all_comments = all_comments[0:100]
     
     # clean a bit
     all_comments = [h for h in all_comments if h != "Unknown"]
