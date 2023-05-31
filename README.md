@@ -20,7 +20,6 @@ The data used for training the model is the ```New York Times comments``` datase
 Before running the script, please download the dataset (503 MB) through Kaggle: https://www.kaggle.com/datasets/aashita/nyt-comments?select=ArticlesApril2017.cs. Name the dataset “news_data” and place it in the ```in``` folder. 
 
 ## 5. Usage
-
 ### 5.1 Prerequisites
 For the scripts to run properly, please install Python 3 and Bash. The code for this assignment is created and tested using the app “Coder Python 1.73.1” on Ucloud.sdu.dk. The final step it to clone the GitHub repository on your own device.
 
@@ -44,7 +43,7 @@ Then, run the command “python3 src/text_generator.py --filename --start_word -
         python3 src/text_generator.py --filename rnn-model_seq280.keras --start_word female --length 10
 
 ## 6. Descussion of results
-The datatset is very large, and I had to train my model on a smaller sample to be able to train it without Ucloud killing the run. The model is only trained on 100 sampled comments, and it is therefore rather a proof of concept than an actual well performing model. This means, that the generated text isn’t as convincing as it would be, if the model were trained on a larger data sample. 
+The dataset is very large, and I had to train my model on a smaller sample to be able to train it without Ucloud killing the run. The model is only trained on 100 sampled comments, and it is therefore rather a proof of concept than an actual well performing model. This means, that the generated text isn’t as convincing as it would be, if the model were trained on a larger data sample. 
 
 ## 7. References
 "New York Times Comments", New York Times, Kaggle: https://www.kaggle.com/datasets/aashita/nyt-comments 
