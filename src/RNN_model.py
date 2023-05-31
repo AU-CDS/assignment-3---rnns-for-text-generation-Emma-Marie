@@ -6,11 +6,7 @@ np.random.seed(42)
 # keras module for building LSTM 
 import tensorflow as tf
 tf.random.set_seed(42)
-import tensorflow.keras.utils as ku 
-from tensorflow.keras.models import Sequential
 from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout
 
 # surpress warnings
 import warnings
